@@ -1,0 +1,109 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'realm-android'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
+    dataBinding {
+        enabled = true
+    }
+
+    defaultConfig {
+        applicationId globalConfiguration.getAt("androidApplicationId")
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storePassword 'android'
+            storeFile file('../keystore/debug.keystore')
+        }
+
+        release {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storePassword 'android'
+            storeFile file('../keystore/debug.keystore')
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFile "$project.rootDir/tools/rules-support-v7-appcompat-proguard.pro"
+            proguardFile "$project.rootDir/tools/rules-support-design-proguard.pro"
+            proguardFile "$project.rootDir/tools/rules-retrolambda-proguard.pro"
+            proguardFile "$project.rootDir/tools/rules-gson-proguard.pro"
+            proguardFile "$project.rootDir/tools/rules-retrofit2-proguard.pro"
+            proguardFile "$project.rootDir/tools/rules-proguard.pro"
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled true
+            proguardFile "$project.rootDir/tools/rules-support-v7-appcompat-proguard.pro"
+            proguardFile "$project.rootDir/tools/rules-support-design-proguard.pro"
+            proguardFile "$project.rootDir/tools/rules-retrolambda-proguard.pro"
+            proguardFile "$project.rootDir/tools/rules-gson-proguard.pro"
+            proguardFile "$project.rootDir/tools/rules-retrofit2-proguard.pro"
+            proguardFile "$project.rootDir/tools/rules-proguard-debug.pro"
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    productFlavors {
+        dev {
+            signingConfig signingConfigs.debug
+            versionCode globalConfiguration.getAt("androidVersionCode")
+            versionName globalConfiguration.getAt("androidVersionName")
+            applicationId globalConfiguration.getAt("androidApplicationIdDev")
+        }
+
+        prod {
+            signingConfig signingConfigs.release
+            versionCode globalConfiguration.getAt("androidVersionCode")
+            versionName globalConfiguration.getAt("androidVersionName")
+            applicationId globalConfiguration.getAt("androidApplicationId")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile globalDependencies.appcompat
+    compile globalDependencies.design
+
+    compile globalDependencies.dagger
+//    compile globalDependencies.daggerAndroid
+    apt globalDependencies.daggerCompiler
+    provided globalDependencies.javaxAnnotation
+
+    compile globalDependencies.retrofit
+    compile globalDependencies.retrofitGsonConvertor
+
+    compile globalDependencies.rxJava2
+    compile globalDependencies.rxAndroid2
+    compile globalDependencies.retrofitRxAdapter2
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    testCompile globalTestDependencies.junit
+    testCompile globalTestDependencies.mockito
+}
