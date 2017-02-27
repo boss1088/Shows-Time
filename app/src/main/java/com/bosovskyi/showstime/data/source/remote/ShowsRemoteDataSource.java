@@ -25,6 +25,6 @@ public class ShowsRemoteDataSource implements ShowsDataSource {
 
     @Override
     public Observable<ShowsResponseEntity> getTopRatedShows() {
-        return null;
+        return mShowsService.getTvTopRated(mApiKey);
     }
 }

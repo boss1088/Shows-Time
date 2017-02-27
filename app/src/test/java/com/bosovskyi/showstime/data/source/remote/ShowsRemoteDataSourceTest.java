@@ -6,23 +6,24 @@ import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.observers.TestObserver;
+import io.reactivex.subscribers.TestSubscriber;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by boss1088 on 2/27/17.
  */
 public class ShowsRemoteDataSourceTest {
 
-    @Mock
-    ShowsApiService service;
 
-    @Mock
+    ShowsApiService service;
     String apiKey;
 
     ShowsRemoteDataSource remoteDataSource;
@@ -30,6 +31,9 @@ public class ShowsRemoteDataSourceTest {
 
     @Before
     public void setUp() throws Exception {
+        service = mock(ShowsApiService.class);
+        apiKey = "mockApiKey";
+
         ShowShortEntity showShortEntity = new ShowShortEntity();
         showShortEntity.name = "Test name";
         showShortEntity.id = 1;
@@ -49,6 +53,8 @@ public class ShowsRemoteDataSourceTest {
     @Test
     public void getTopRatedShowsTest() {
         TestObserver<ShowsResponseEntity> testObserver = new TestObserver<>();
+
+        when(service.getTvTopRated(apiKey)).thenReturn(Observable.just(expectedResult));
 
         remoteDataSource.getTopRatedShows()
                 .subscribe(testObserver);
