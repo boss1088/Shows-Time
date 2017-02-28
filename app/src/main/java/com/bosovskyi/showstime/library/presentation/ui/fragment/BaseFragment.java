@@ -1,4 +1,4 @@
-package com.bosovskyi.showstime.library.presentation.ui;
+package com.bosovskyi.showstime.library.presentation.ui.fragment;
 
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -12,8 +12,7 @@ import android.view.ViewGroup;
  * Created by boss1088 on 2/9/17.
  */
 
-public abstract class BaseFragment
-        <BINDING extends ViewDataBinding>
+public abstract class BaseFragment<BINDING extends ViewDataBinding>
         extends Fragment {
 
     protected BINDING binding;

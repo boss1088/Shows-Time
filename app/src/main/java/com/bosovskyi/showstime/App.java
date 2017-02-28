@@ -12,9 +12,9 @@ import com.bosovskyi.showstime.di.modules.AndroidModule;
 
 public class App extends Application {
 
-    private static AppComponent component;
+    private AppComponent component;
 
-    public static AppComponent getComponent() {
+    public AppComponent getComponent() {
         return component;
     }
 

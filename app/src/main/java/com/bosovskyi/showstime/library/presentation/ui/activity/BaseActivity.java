@@ -1,4 +1,4 @@
-package com.bosovskyi.showstime.library.presentation.ui;
+package com.bosovskyi.showstime.library.presentation.ui.activity;
 
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -23,7 +23,9 @@ public abstract class BaseActivity<BINDING extends ViewDataBinding> extends AppC
     }
 
     private void setupToolbar() {
-        setSupportActionBar(getToolbar());
+        if (getToolbar() != null) {
+            setSupportActionBar(getToolbar());
+        }
     }
 
     protected abstract Toolbar getToolbar();

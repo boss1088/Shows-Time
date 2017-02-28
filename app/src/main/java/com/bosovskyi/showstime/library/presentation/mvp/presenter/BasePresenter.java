@@ -6,8 +6,6 @@ package com.bosovskyi.showstime.library.presentation.mvp.presenter;
 
 public interface BasePresenter {
 
-    void bind();
-
     void unbind();
 
 }

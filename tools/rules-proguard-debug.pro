@@ -20,3 +20,11 @@
 -dontobfuscate
 -dontoptimize
 -ignorewarnings
+
+#-keepattributes EnclosingMethod
+#
+#-dontwarn android.databinding.**
+#-keep class android.databinding.** { *; }
+#
+#-keep class com.bosovskyi.showstime.databinding.** { *; }
+#

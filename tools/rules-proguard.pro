@@ -28,5 +28,13 @@
     public static int e(...);
 }
 
+#-keepattributes EnclosingMethod
+
+#-dontwarn android.databinding.**
+#-keep class android.databinding.** { *; }
+#
+#-keep class com.bosovskyi.showstime.databinding.** { *; }
+#
+
 # Proguard configurations for common Android libraries:
 # https://github.com/krschultz/android-proguard-snippets

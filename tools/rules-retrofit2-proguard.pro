@@ -10,3 +10,5 @@
 -keepclassmembernames interface * {
         @retrofit.http.* <methods>;
 }
+
+-dontwarn okio.**
