@@ -11,15 +11,20 @@ import java.util.List;
 
 public class ShowsResponseEntity {
 
+    public ShowsResponseEntity() {}
+
+    public ShowsResponseEntity(int page, List<ShowShortEntity> shows, int totalPages) {
+        this.page = page;
+        this.shows = shows;
+        this.totalPages = totalPages;
+    }
+
     @SerializedName("page")
     @Expose
     public int page;
 
     @SerializedName("results")
     public List<ShowShortEntity> shows = null;
-
-    @SerializedName("total_results")
-    public int totalResults;
 
     @SerializedName("total_pages")
     public int totalPages;

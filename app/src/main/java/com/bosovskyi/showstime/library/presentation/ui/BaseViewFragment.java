@@ -12,7 +12,7 @@ import com.bosovskyi.showstime.library.presentation.mvp.view.BaseView;
  */
 public abstract class BaseViewFragment<BINDING extends ViewDataBinding,
                 VIEW extends BaseView,
-                PRESENTER extends BasePresenter<VIEW>>
+                PRESENTER extends BasePresenter>
         extends BaseFragment<BINDING> {
 
     protected VIEW view;
@@ -23,7 +23,7 @@ public abstract class BaseViewFragment<BINDING extends ViewDataBinding,
 
         view = initView();
         injectPresenterComponent();
-        getPresenter().bind(view);
+//        getPresenter().bind(view);
     }
 
     @Override

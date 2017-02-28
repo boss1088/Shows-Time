@@ -11,4 +11,6 @@ import io.reactivex.Observable;
 public interface ShowsDataSource {
 
     Observable<ShowsResponseEntity> getTopRatedShows();
+
+    void refresh();
 }
