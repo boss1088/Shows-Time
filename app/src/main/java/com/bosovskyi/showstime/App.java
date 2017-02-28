@@ -5,6 +5,7 @@ import android.app.Application;
 import com.bosovskyi.showstime.di.components.AppComponent;
 import com.bosovskyi.showstime.di.components.DaggerAppComponent;
 import com.bosovskyi.showstime.di.modules.AndroidModule;
+import com.frogermcs.dagger2metrics.Dagger2Metrics;
 
 /**
  * Created by boss1088 on 2/23/17.
@@ -21,6 +22,10 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (BuildConfig.DEBUG) {
+            Dagger2Metrics.enableCapturing(this);
+        }
 
         component = buildComponent();
     }

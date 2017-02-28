@@ -14,8 +14,9 @@ import com.bosovskyi.showstime.library.presentation.mvp.presenter.BaseStatePrese
 
 public abstract class BaseViewStateFragment<BINDING extends ViewDataBinding,
                                         STATE extends StateObject,
-                                        PRESENTER extends BaseStatePresenter<STATE>>
-        extends BaseViewFragment<BINDING, PRESENTER> {
+                                        PRESENTER extends BaseStatePresenter<STATE>,
+                                        COMPONENT>
+        extends BaseViewFragment<BINDING, PRESENTER, COMPONENT> {
 
     protected STATE state;
 

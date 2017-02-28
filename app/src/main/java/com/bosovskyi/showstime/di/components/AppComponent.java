@@ -1,8 +1,5 @@
 package com.bosovskyi.showstime.di.components;
 
-import android.content.res.Resources;
-
-import com.bosovskyi.showstime.data.source.ShowsRepository;
 import com.bosovskyi.showstime.di.modules.AndroidModule;
 import com.bosovskyi.showstime.di.modules.ShowsApiModule;
 import com.bosovskyi.showstime.di.modules.ShowsRepositoryModule;
@@ -18,7 +15,6 @@ import dagger.Component;
 @Component (modules = {AndroidModule.class, ShowsApiModule.class, ShowsRepositoryModule.class})
 public interface AppComponent {
 
-    Resources getResources();
-    ShowsRepository getRepository();
+    TopShowsComponent.Builder topShowsComponentBuilder();
 
 }

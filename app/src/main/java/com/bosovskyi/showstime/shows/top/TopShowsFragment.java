@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.bosovskyi.showstime.App;
 import com.bosovskyi.showstime.R;
 import com.bosovskyi.showstime.databinding.FragmentTopTvShowsBinding;
-import com.bosovskyi.showstime.di.components.DaggerTopShowsComponent;
+import com.bosovskyi.showstime.di.components.TopShowsComponent;
 import com.bosovskyi.showstime.di.modules.TopShowsPresenterModule;
 import com.bosovskyi.showstime.library.presentation.ui.fragment.BaseViewStateFragment;
 
@@ -21,7 +21,8 @@ import javax.inject.Inject;
  * Created by boss1088 on 2/28/17.
  */
 
-public class TopShowsFragment extends BaseViewStateFragment<FragmentTopTvShowsBinding, TopShowsStateImpl, TopShowsContract.Presenter>
+public class TopShowsFragment
+        extends BaseViewStateFragment<FragmentTopTvShowsBinding, TopShowsStateImpl, TopShowsContract.Presenter, TopShowsComponent>
         implements TopShowsContract.View {
 
     @Inject
@@ -40,12 +41,15 @@ public class TopShowsFragment extends BaseViewStateFragment<FragmentTopTvShowsBi
     }
 
     @Override
-    protected void injectComponent(Context context) {
-        DaggerTopShowsComponent.builder()
-                .appComponent(((App) context.getApplicationContext()).getComponent())
+    protected TopShowsComponent injectComponent(Context context) {
+        TopShowsComponent component = ((App) context.getApplicationContext()).getComponent()
+                .topShowsComponentBuilder()
                 .topShowsPresenterModule(new TopShowsPresenterModule(this))
-                .build()
-                .inject(this);
+                .build();
+
+        component.inject(this);
+
+        return component;
     }
 
     @Override

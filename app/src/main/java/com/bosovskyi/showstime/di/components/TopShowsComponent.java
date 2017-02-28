@@ -12,8 +12,15 @@ import dagger.Subcomponent;
  */
 
 @ScreenScope
-@Component(dependencies = AppComponent.class, modules = TopShowsPresenterModule.class)
+@Subcomponent(modules = TopShowsPresenterModule.class)
 public interface TopShowsComponent {
+
+    @Subcomponent.Builder
+    interface Builder {
+        TopShowsComponent.Builder topShowsPresenterModule(
+                TopShowsPresenterModule topShowsPresenterModule);
+        TopShowsComponent build();
+    }
 
     void inject(TopShowsFragment fragment);
 

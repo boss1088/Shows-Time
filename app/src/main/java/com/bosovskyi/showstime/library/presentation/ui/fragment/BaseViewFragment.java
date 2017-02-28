@@ -12,14 +12,17 @@ import dagger.Component;
  * Created by boss1088 on 2/17/17.
  */
 public abstract class BaseViewFragment<BINDING extends ViewDataBinding,
-                                        PRESENTER extends BasePresenter>
+                                        PRESENTER extends BasePresenter,
+                                        COMPONENT>
         extends BaseFragment<BINDING> {
+
+    protected COMPONENT mComponent;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        injectComponent(context);
+        mComponent = injectComponent(context);
     }
 
     @Override
@@ -28,7 +31,13 @@ public abstract class BaseViewFragment<BINDING extends ViewDataBinding,
         super.onDestroyView();
     }
 
-    protected abstract void injectComponent(Context context);
+    @Override
+    public void onDetach() {
+        mComponent = null;
+        super.onDetach();
+    }
+
+    protected abstract COMPONENT injectComponent(Context context);
 
     protected abstract PRESENTER getPresenter();
 }
