@@ -1,6 +1,7 @@
 package com.bosovskyi.showstime.di.components;
 
 import com.bosovskyi.showstime.di.modules.AndroidModule;
+import com.bosovskyi.showstime.di.modules.AppModule;
 import com.bosovskyi.showstime.di.modules.ShowsApiModule;
 import com.bosovskyi.showstime.di.modules.ShowsRepositoryModule;
 import com.bosovskyi.showstime.di.scopes.AppScope;
@@ -12,7 +13,7 @@ import dagger.Component;
  */
 
 @AppScope
-@Component (modules = {AndroidModule.class, ShowsApiModule.class, ShowsRepositoryModule.class})
+@Component (modules = {AndroidModule.class, ShowsApiModule.class, ShowsRepositoryModule.class, AppModule.class})
 public interface AppComponent {
 
     TopShowsComponent.Builder topShowsComponentBuilder();

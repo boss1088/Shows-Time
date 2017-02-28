@@ -28,8 +28,4 @@ public class ShowsRemoteDataSource implements ShowsDataSource {
         return mShowsService.getTvTopRated(mApiKey);
     }
 
-    @Override
-    public void refresh() {
-        //We implement this method on repository
-    }
 }

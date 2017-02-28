@@ -14,6 +14,6 @@ public interface TopShowsContract {
     }
 
     interface Presenter extends BaseStatePresenter<TopShowsStateImpl> {
-
+        void loadTopShows();
     }
 }

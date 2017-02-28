@@ -4,9 +4,6 @@ import android.content.Context;
 import android.databinding.ViewDataBinding;
 
 import com.bosovskyi.showstime.library.presentation.mvp.presenter.BasePresenter;
-import com.bosovskyi.showstime.library.presentation.ui.fragment.BaseFragment;
-
-import dagger.Component;
 
 /**
  * Created by boss1088 on 2/17/17.

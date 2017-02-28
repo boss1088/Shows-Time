@@ -62,7 +62,6 @@ public class ShowsRepositoryTest {
         showsRepository.getTopRatedShows().subscribe(testObserver);
 
         verify(remoteDataSource).getTopRatedShows();
-        assertFalse(showsRepository.mCacheIsDirty);
         testObserver.assertValues(expectedResult);
     }
 
