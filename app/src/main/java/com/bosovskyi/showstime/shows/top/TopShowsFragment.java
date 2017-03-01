@@ -75,9 +75,8 @@ public class TopShowsFragment
         return mPresenter;
     }
 
-
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    public void setLoadingIndicator(boolean active) {
+
     }
 }

@@ -16,6 +16,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import static org.junit.Assert.*;
@@ -65,11 +66,11 @@ public class TopShowsPresenterTest {
 
         mPresenter.loadTopShows();
 
+        verify(mView).setLoadingIndicator(true);
+
+        verify(mView).setLoadingIndicator(false);
+
         assertEquals(mPresenter.mTopShowsState.page, 1);
-    }
-
-    private void setShowsAvailable(ShowsRepository repository) {
-
     }
 
 }

@@ -41,6 +41,8 @@ public class TopShowsPresenter implements TopShowsContract.Presenter {
 
     @Override
     public void loadTopShows() {
+        mTopShowsView.setLoadingIndicator(true);
+
         mDisposable.add(
                 mShowsRepository.getTopRatedShows()
                         .subscribeOn(mSchedulerProvider.computation())
@@ -52,7 +54,8 @@ public class TopShowsPresenter implements TopShowsContract.Presenter {
                                 },
                                 throwable -> {
 
-                                }));
+                                },
+                                () -> mTopShowsView.setLoadingIndicator(false)));
     }
 
     @Override

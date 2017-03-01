@@ -11,6 +11,8 @@ public interface TopShowsContract {
 
     interface View extends BaseView {
 
+        void setLoadingIndicator(boolean active);
+
     }
 
     interface Presenter extends BaseStatePresenter<TopShowsStateImpl> {
