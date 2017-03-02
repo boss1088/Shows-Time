@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.frogermcs.dagger2metrics'
 apply plugin: 'realm-android'
 apply plugin: 'me.tatarka.retrolambda'
@@ -59,6 +58,7 @@ android {
             proguardFile "$project.rootDir/tools/rules-retrofit2-proguard.pro"
             proguardFile "$project.rootDir/tools/rules-proguard-debug.pro"
             proguardFile getDefaultProguardFile('proguard-android.txt')
+            testProguardFile("$project.rootDir/tools/rules-test-proguard.pro")
             signingConfig signingConfigs.debug
         }
     }
@@ -90,8 +90,7 @@ dependencies {
     compile globalDependencies.design
 
     compile globalDependencies.dagger
-//    compile globalDependencies.daggerAndroid
-    apt globalDependencies.daggerCompiler
+    annotationProcessor globalDependencies.daggerCompiler
     provided globalDependencies.javaxAnnotation
 
     compile globalDependencies.retrofit
@@ -107,4 +106,5 @@ dependencies {
 
     testCompile globalTestDependencies.junit
     testCompile globalTestDependencies.mockito
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:2.9"
 }
