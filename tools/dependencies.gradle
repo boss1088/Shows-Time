@@ -21,7 +21,6 @@ ext {
     javaxInjectVersion = '1'
     retrofitVersion = '2.2.0'
     rxJava2AdapterVersion = '1.0.0'
-    gsonVersion = '2.8.0'
 
     //Testing libraries
     jUnitVersion = '4.12'
@@ -39,8 +38,7 @@ ext {
             javaxInject           : "javax.inject:javax.inject:${javaxInjectVersion}",
             retrofit              : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitGsonConvertor : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            retrofitRxAdapter2    : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
-            gson                  : "com.google.code.gson:gson:${gsonVersion}"
+            retrofitRxAdapter2    : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
     ]
 
     globalTestDependencies = [

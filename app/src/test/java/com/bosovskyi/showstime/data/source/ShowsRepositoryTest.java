@@ -1,7 +1,7 @@
 package com.bosovskyi.showstime.data.source;
 
-import com.bosovskyi.showstime.domain.entity.ShowShortEntity;
-import com.bosovskyi.showstime.domain.entity.ShowsResponseEntity;
+import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
+import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +14,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.observers.TestObserver;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

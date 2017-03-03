@@ -1,10 +1,13 @@
 package com.bosovskyi.showstime.shows.top;
 
 import com.bosovskyi.showstime.data.source.ShowsRepository;
+import com.bosovskyi.showstime.library.presentation.mvp.presenter.StatePresenter;
 import com.bosovskyi.showstime.library.presentation.mvp.presenter.impl.StatePresenterImpl;
-import com.bosovskyi.showstime.domain.schedulers.BaseSchedulerProvider;
+import com.bosovskyi.showstime.util.schedulers.BaseSchedulerProvider;
 
 import javax.inject.Inject;
+
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by boss1088 on 2/28/17.

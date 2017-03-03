@@ -3,7 +3,6 @@ package com.bosovskyi.showstime.util.schedulers;
 import android.support.annotation.NonNull;
 
 import com.bosovskyi.showstime.di.scopes.AppScope;
-import com.bosovskyi.showstime.domain.schedulers.BaseSchedulerProvider;
 
 import javax.inject.Inject;
 

@@ -1,4 +1,4 @@
-package com.bosovskyi.showstime.domain.entity;
+package com.bosovskyi.showstime.data.source.entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

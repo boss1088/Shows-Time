@@ -3,7 +3,7 @@ package com.bosovskyi.showstime.shows.top;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.bosovskyi.showstime.domain.entity.ShowShortEntity;
+import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
 import com.bosovskyi.showstime.library.presentation.mvp.state.StateObject;
 
 import java.util.ArrayList;

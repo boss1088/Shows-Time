@@ -2,8 +2,6 @@ package com.bosovskyi.showstime.util.schedulers;
 
 import android.support.annotation.NonNull;
 
-import com.bosovskyi.showstime.domain.schedulers.BaseSchedulerProvider;
-
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
 

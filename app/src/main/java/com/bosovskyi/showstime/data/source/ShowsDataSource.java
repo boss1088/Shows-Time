@@ -1,6 +1,6 @@
-package com.bosovskyi.showstime.domain.repository;
+package com.bosovskyi.showstime.data.source;
 
-import com.bosovskyi.showstime.domain.entity.ShowsResponseEntity;
+import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
 
 import io.reactivex.Observable;
 

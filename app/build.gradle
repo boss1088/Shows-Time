@@ -6,17 +6,17 @@ apply plugin: 'me.tatarka.retrolambda'
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
-    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
-    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
 
     dataBinding {
         enabled = true
     }
 
     defaultConfig {
-        applicationId globalConfiguration["androidApplicationId"]
-        minSdkVersion globalConfiguration["androidMinSdkVersion"]
-        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+        applicationId globalConfiguration.getAt("androidApplicationId")
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -50,7 +50,7 @@ android {
             signingConfig signingConfigs.release
         }
         debug {
-            minifyEnabled true
+            minifyEnabled false
             proguardFile "$project.rootDir/tools/rules-support-v7-appcompat-proguard.pro"
             proguardFile "$project.rootDir/tools/rules-support-design-proguard.pro"
             proguardFile "$project.rootDir/tools/rules-retrolambda-proguard.pro"
@@ -109,5 +109,4 @@ dependencies {
     testCompile globalTestDependencies.mockito
     androidTestCompile globalTestDependencies.mockito
     androidTestAnnotationProcessor globalDependencies.daggerCompiler
-    compile project(path: ':domain')
 }

@@ -1,7 +1,7 @@
 package com.bosovskyi.showstime.di.modules;
 
 import com.bosovskyi.showstime.di.scopes.AppScope;
-import com.bosovskyi.showstime.domain.schedulers.BaseSchedulerProvider;
+import com.bosovskyi.showstime.util.schedulers.BaseSchedulerProvider;
 import com.bosovskyi.showstime.util.schedulers.SchedulerProvider;
 
 import dagger.Module;
