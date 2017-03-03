@@ -1,7 +1,7 @@
 package com.bosovskyi.showstime.data.source.remote;
 
 import com.bosovskyi.showstime.data.source.ShowsDataSource;
-import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
+import com.bosovskyi.showstime.domain.entity.ShowsResponseEntity;
 
 import javax.inject.Inject;
 

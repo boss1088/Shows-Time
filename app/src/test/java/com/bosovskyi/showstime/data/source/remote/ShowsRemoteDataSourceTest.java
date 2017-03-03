@@ -1,7 +1,7 @@
 package com.bosovskyi.showstime.data.source.remote;
 
-import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
-import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
+import com.bosovskyi.showstime.domain.entity.ShowShortEntity;
+import com.bosovskyi.showstime.domain.entity.ShowsResponseEntity;
 
 import org.junit.Before;
 import org.junit.Test;

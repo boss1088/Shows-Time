@@ -1,9 +1,8 @@
 package com.bosovskyi.showstime.shows.top;
 
 import com.bosovskyi.showstime.data.source.ShowsRepository;
-import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
-import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
-import com.bosovskyi.showstime.util.schedulers.BaseSchedulerProvider;
+import com.bosovskyi.showstime.domain.entity.ShowShortEntity;
+import com.bosovskyi.showstime.domain.entity.ShowsResponseEntity;
 import com.bosovskyi.showstime.util.schedulers.TestSchedulerProvider;
 
 import org.junit.Before;

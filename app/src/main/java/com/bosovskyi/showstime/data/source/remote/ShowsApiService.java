@@ -1,6 +1,6 @@
 package com.bosovskyi.showstime.data.source.remote;
 
-import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
+import com.bosovskyi.showstime.domain.entity.ShowsResponseEntity;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

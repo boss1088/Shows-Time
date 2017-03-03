@@ -1,8 +1,4 @@
-package com.bosovskyi.showstime.util.schedulers;
-
-import android.support.annotation.NonNull;
-
-import com.bosovskyi.showstime.domain.schedulers.BaseSchedulerProvider;
+package com.bosovskyi.showstime.domain.schedulers;
 
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
@@ -12,19 +8,16 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class TestSchedulerProvider implements BaseSchedulerProvider {
 
-    @NonNull
     @Override
     public Scheduler computation() {
         return Schedulers.trampoline();
     }
 
-    @NonNull
     @Override
     public Scheduler io() {
         return Schedulers.trampoline();
     }
 
-    @NonNull
     @Override
     public Scheduler ui() {
         return Schedulers.trampoline();

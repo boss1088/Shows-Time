@@ -1,6 +1,4 @@
-package com.bosovskyi.showstime.util.schedulers;
-
-import android.support.annotation.NonNull;
+package com.bosovskyi.showstime.domain.schedulers;
 
 import io.reactivex.Scheduler;
 
@@ -9,12 +7,10 @@ import io.reactivex.Scheduler;
  */
 public interface BaseSchedulerProvider {
 
-    @NonNull
     Scheduler computation();
 
-    @NonNull
     Scheduler io();
 
-    @NonNull
     Scheduler ui();
+
 }
