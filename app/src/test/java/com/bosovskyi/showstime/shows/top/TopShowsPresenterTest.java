@@ -32,17 +32,13 @@ public class TopShowsPresenterTest {
     @Mock
     ShowsRepository mRepository;
 
-    private TopShowsPresenter mPresenter;
+    private TopShowsPresenter presenter;
 
-    private BaseSchedulerProvider mSchedulerProvider;
-
-    ShowsResponseEntity expectedResult;
+    private ShowsResponseEntity expectedResult;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-
-        mSchedulerProvider = new TestSchedulerProvider();
 
         ShowShortEntity showShortEntity = new ShowShortEntity();
         showShortEntity.name = "Test name";
@@ -56,21 +52,21 @@ public class TopShowsPresenterTest {
         expectedResult.page = 1;
         expectedResult.totalPages = 1;
 
-        mPresenter = new TopShowsPresenter(mView, mRepository, mSchedulerProvider);
-        mPresenter.setState(new TopShowsStateImpl());
+        presenter = new TopShowsPresenter(mRepository, new TestSchedulerProvider());
+        presenter.bind(mView, new TopShowsStateImpl());
     }
 
     @Test
     public void loadTopItems() {
         when(mRepository.getTopRatedShows()).thenReturn(Observable.just(expectedResult));
 
-        mPresenter.loadTopShows();
+        presenter.loadTopShows();
 
-        verify(mView).setLoadingIndicator(true);
+        verify(presenter.view()).setLoadingIndicator(true);
 
-        verify(mView).setLoadingIndicator(false);
+        verify(presenter.view()).setLoadingIndicator(false);
 
-        assertEquals(mPresenter.mTopShowsState.page, 1);
+        assertEquals(presenter.state().page, 1);
     }
 
 }

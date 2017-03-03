@@ -8,7 +8,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath "io.realm:realm-gradle-plugin:1.2.0"
+        classpath "io.realm:realm-gradle-plugin:3.0.0"
         classpath 'me.tatarka:gradle-retrolambda:3.5.0'
         classpath 'com.frogermcs.dagger2metrics:dagger2metrics-plugin:0.2'
 
@@ -19,14 +19,14 @@ buildscript {
 
 allprojects {
     ext {
-        androidApplicationId = "com.bosovskyi.showtime"
-        androidApplicationIdDev = "com.bosovskyi.showtime.dev"
+        androidApplicationId = "com.bosovskyi.showstime"
+        androidApplicationIdDev = "com.bosovskyi.showstime.dev"
         androidVersionCode = 1
         androidVersionName = "1.0"
         testApplicationId = 'com.bosovskyi.showtime.test'
     }
 }
 
-//task clean(type: Delete) {
-//    delete rootProject.buildDir
-//}
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

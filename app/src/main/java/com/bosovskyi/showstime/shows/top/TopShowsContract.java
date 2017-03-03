@@ -1,6 +1,6 @@
 package com.bosovskyi.showstime.shows.top;
 
-import com.bosovskyi.showstime.library.presentation.mvp.presenter.BaseStatePresenter;
+import com.bosovskyi.showstime.library.presentation.mvp.presenter.StatePresenter;
 import com.bosovskyi.showstime.library.presentation.mvp.view.BaseView;
 
 /**
@@ -15,7 +15,7 @@ public interface TopShowsContract {
 
     }
 
-    interface Presenter extends BaseStatePresenter<TopShowsStateImpl> {
+    interface Presenter extends StatePresenter<View, TopShowsStateImpl> {
         void loadTopShows();
     }
 }

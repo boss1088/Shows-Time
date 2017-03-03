@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.bosovskyi.showstime.di.components.AppComponent;
 import com.bosovskyi.showstime.di.components.DaggerAppComponent;
+import com.bosovskyi.showstime.di.components.Injector;
 import com.bosovskyi.showstime.di.modules.AndroidModule;
 import com.frogermcs.dagger2metrics.Dagger2Metrics;
 
@@ -33,6 +34,12 @@ public class App extends Application {
     protected AppComponent buildComponent() {
         return DaggerAppComponent.builder()
                 .androidModule(new AndroidModule(this))
+                .build();
+    }
+
+    public Injector getInjector() {
+        return this.component
+                .screenSubComponentBuilder()
                 .build();
     }
 }

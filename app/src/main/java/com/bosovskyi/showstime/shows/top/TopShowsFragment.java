@@ -1,6 +1,5 @@
 package com.bosovskyi.showstime.shows.top;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -8,12 +7,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.bosovskyi.showstime.App;
 import com.bosovskyi.showstime.R;
 import com.bosovskyi.showstime.databinding.FragmentTopTvShowsBinding;
-import com.bosovskyi.showstime.di.components.TopShowsComponent;
-import com.bosovskyi.showstime.di.modules.TopShowsPresenterModule;
-import com.bosovskyi.showstime.library.presentation.ui.fragment.BaseViewStateFragment;
+import com.bosovskyi.showstime.library.presentation.ui.fragment.BaseStateFragment;
 
 import javax.inject.Inject;
 
@@ -22,11 +18,11 @@ import javax.inject.Inject;
  */
 
 public class TopShowsFragment
-        extends BaseViewStateFragment<FragmentTopTvShowsBinding, TopShowsStateImpl, TopShowsContract.Presenter, TopShowsComponent>
+        extends BaseStateFragment<FragmentTopTvShowsBinding, TopShowsContract.View, TopShowsStateImpl, TopShowsContract.Presenter>
         implements TopShowsContract.View {
 
     @Inject
-    TopShowsPresenter mPresenter;
+    TopShowsPresenter presenter;
 
     @Inject
     Resources resources;
@@ -36,25 +32,23 @@ public class TopShowsFragment
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    protected TopShowsComponent injectComponent(Context context) {
-        TopShowsComponent component = ((App) context.getApplicationContext()).getComponent()
-                .topShowsComponentBuilder()
-                .topShowsPresenterModule(new TopShowsPresenterModule(this))
-                .build();
-
-        component.inject(this);
-
-        return component;
+    protected void callInjection() {
+        getInjector().inject(this);
     }
 
     @Override
     protected FragmentTopTvShowsBinding initBinding(LayoutInflater inflater, @Nullable ViewGroup container) {
         return DataBindingUtil.inflate(inflater, R.layout.fragment_top_tv_shows, container, false);
+    }
+
+    @Override
+    protected TopShowsContract.Presenter presenter() {
+        return presenter;
+    }
+
+    @Override
+    protected TopShowsContract.View view() {
+        return this;
     }
 
     @Override
@@ -68,11 +62,6 @@ public class TopShowsFragment
     @Override
     protected TopShowsStateImpl initializeState() {
         return new TopShowsStateImpl();
-    }
-
-    @Override
-    protected TopShowsContract.Presenter getPresenter() {
-        return mPresenter;
     }
 
     @Override

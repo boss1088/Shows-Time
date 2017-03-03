@@ -50,7 +50,7 @@ android {
             signingConfig signingConfigs.release
         }
         debug {
-            minifyEnabled true
+            minifyEnabled false
             proguardFile "$project.rootDir/tools/rules-support-v7-appcompat-proguard.pro"
             proguardFile "$project.rootDir/tools/rules-support-design-proguard.pro"
             proguardFile "$project.rootDir/tools/rules-retrolambda-proguard.pro"
@@ -91,6 +91,7 @@ dependencies {
 
     compile globalDependencies.dagger
     annotationProcessor globalDependencies.daggerCompiler
+    debugAnnotationProcessor globalDependencies.daggerCompiler
     provided globalDependencies.javaxAnnotation
 
     compile globalDependencies.retrofit
@@ -106,5 +107,6 @@ dependencies {
 
     testCompile globalTestDependencies.junit
     testCompile globalTestDependencies.mockito
-    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:2.9"
+    androidTestCompile globalTestDependencies.mockito
+    androidTestAnnotationProcessor globalDependencies.daggerCompiler
 }

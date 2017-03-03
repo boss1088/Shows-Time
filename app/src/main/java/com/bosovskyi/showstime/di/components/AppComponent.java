@@ -16,6 +16,6 @@ import dagger.Component;
 @Component (modules = {AndroidModule.class, ShowsApiModule.class, ShowsRepositoryModule.class, AppModule.class})
 public interface AppComponent {
 
-    TopShowsComponent.Builder topShowsComponentBuilder();
+    ScreenSubComponent.Builder screenSubComponentBuilder();
 
 }
