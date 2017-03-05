@@ -15,7 +15,6 @@ import java.util.List;
 import io.reactivex.Observable;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import static org.junit.Assert.*;
@@ -56,7 +55,7 @@ public class TopShowsPresenterTest {
     }
 
     @Test
-    public void loadTopItemsSuccess() {
+    public void loadTopShowsSuccess() {
         when(interactor.get()).thenReturn(Observable.just(expectedResult));
 
         presenter.loadTopShows();
@@ -71,7 +70,7 @@ public class TopShowsPresenterTest {
     }
 
     @Test
-    public void loadTopItemsError() {
+    public void loadTopShowsError() {
         Exception exception = new Exception("Exception");
         when(interactor.get()).thenReturn(Observable.error(exception));
 
