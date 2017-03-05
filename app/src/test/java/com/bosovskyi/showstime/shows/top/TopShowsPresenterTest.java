@@ -1,10 +1,8 @@
 package com.bosovskyi.showstime.shows.top;
 
-import com.bosovskyi.showstime.data.source.ShowsRepository;
+import com.bosovskyi.showstime.data.interactor.shows.GetTopShowsInteractor;
 import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
 import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
-import com.bosovskyi.showstime.util.schedulers.BaseSchedulerProvider;
-import com.bosovskyi.showstime.util.schedulers.TestSchedulerProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +15,7 @@ import java.util.List;
 import io.reactivex.Observable;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import static org.junit.Assert.*;
@@ -27,10 +26,10 @@ import static org.junit.Assert.*;
 public class TopShowsPresenterTest {
 
     @Mock
-    TopShowsContract.View mView;
+    TopShowsContract.View view;
 
     @Mock
-    ShowsRepository mRepository;
+    GetTopShowsInteractor interactor;
 
     private TopShowsPresenter presenter;
 
@@ -52,21 +51,37 @@ public class TopShowsPresenterTest {
         expectedResult.page = 1;
         expectedResult.totalPages = 1;
 
-        presenter = new TopShowsPresenter(mRepository, new TestSchedulerProvider());
-        presenter.bind(mView, new TopShowsStateImpl());
+        presenter = new TopShowsPresenter(interactor);
+        presenter.bind(view, new TopShowsState());
     }
 
     @Test
-    public void loadTopItems() {
-        when(mRepository.getTopRatedShows()).thenReturn(Observable.just(expectedResult));
+    public void loadTopItemsSuccess() {
+        when(interactor.get()).thenReturn(Observable.just(expectedResult));
 
         presenter.loadTopShows();
 
         verify(presenter.view()).setLoadingIndicator(true);
 
+        verify(presenter.view()).updateItems(expectedResult.shows);
+
         verify(presenter.view()).setLoadingIndicator(false);
 
         assertEquals(presenter.state().page, 1);
+    }
+
+    @Test
+    public void loadTopItemsError() {
+        Exception exception = new Exception("Exception");
+        when(interactor.get()).thenReturn(Observable.error(exception));
+
+        presenter.loadTopShows();
+
+        verify(presenter.view()).setLoadingIndicator(true);
+
+        verify(presenter.view()).showErrorMessage(exception.getMessage());
+
+        verify(presenter.view()).setLoadingIndicator(false);
     }
 
 }

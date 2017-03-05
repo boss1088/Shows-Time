@@ -1,4 +1,4 @@
-package com.bosovskyi.showstime.data.source.remote;
+package com.bosovskyi.showstime.data.source.api;
 
 import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
 

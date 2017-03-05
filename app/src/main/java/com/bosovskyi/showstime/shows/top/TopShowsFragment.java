@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.bosovskyi.showstime.R;
+import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
 import com.bosovskyi.showstime.databinding.FragmentTopTvShowsBinding;
 import com.bosovskyi.showstime.library.presentation.ui.fragment.BaseStateFragment;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -18,7 +21,7 @@ import javax.inject.Inject;
  */
 
 public class TopShowsFragment
-        extends BaseStateFragment<FragmentTopTvShowsBinding, TopShowsContract.View, TopShowsStateImpl, TopShowsContract.Presenter>
+        extends BaseStateFragment<FragmentTopTvShowsBinding, TopShowsContract.View, TopShowsState, TopShowsContract.Presenter>
         implements TopShowsContract.View {
 
     @Inject
@@ -55,17 +58,31 @@ public class TopShowsFragment
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //TODO:
-        binding.resultText.setText(String.valueOf(state.page));
+        presenter().loadTopShows();
     }
 
     @Override
-    protected TopShowsStateImpl initializeState() {
-        return new TopShowsStateImpl();
+    protected TopShowsState initializeState() {
+        return new TopShowsState();
     }
 
     @Override
     public void setLoadingIndicator(boolean active) {
+
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+
+    }
+
+    @Override
+    public void updateItems(List<ShowShortEntity> entities) {
+
+    }
+
+    @Override
+    public void addItems(List<ShowShortEntity> entities) {
 
     }
 }

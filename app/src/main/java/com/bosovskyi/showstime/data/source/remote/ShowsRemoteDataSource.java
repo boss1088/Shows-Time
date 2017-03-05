@@ -1,6 +1,8 @@
 package com.bosovskyi.showstime.data.source.remote;
 
 import com.bosovskyi.showstime.data.source.ShowsDataSource;
+import com.bosovskyi.showstime.data.source.api.ApiConstants;
+import com.bosovskyi.showstime.data.source.api.ShowsApiService;
 import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
 
 import javax.inject.Inject;
@@ -15,17 +17,14 @@ public class ShowsRemoteDataSource implements ShowsDataSource {
 
     private final ShowsApiService mShowsService;
 
-    private final String mApiKey;
-
     @Inject
-    public ShowsRemoteDataSource(ShowsApiService service, String apiKey) {
+    public ShowsRemoteDataSource(ShowsApiService service) {
         mShowsService = service;
-        mApiKey = apiKey;
     }
 
     @Override
     public Observable<ShowsResponseEntity> getTopRatedShows() {
-        return mShowsService.getTvTopRated(mApiKey);
+        return mShowsService.getTvTopRated(ApiConstants.API_KEY);
     }
 
 }

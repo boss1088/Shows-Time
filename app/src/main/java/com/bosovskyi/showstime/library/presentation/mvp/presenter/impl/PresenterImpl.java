@@ -13,7 +13,7 @@ public abstract class PresenterImpl<VIEW extends BaseView> implements Presenter<
 
     protected VIEW view;
 
-    protected final CompositeDisposable disposable = new CompositeDisposable();
+    protected final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     public void bind(VIEW view) {
@@ -23,7 +23,7 @@ public abstract class PresenterImpl<VIEW extends BaseView> implements Presenter<
     @Override
     public void unbind() {
         this.view = null;
-        disposable.clear();
+        compositeDisposable.clear();
     }
 
     public VIEW view() {

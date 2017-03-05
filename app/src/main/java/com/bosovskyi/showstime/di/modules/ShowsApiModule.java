@@ -1,6 +1,6 @@
 package com.bosovskyi.showstime.di.modules;
 
-import com.bosovskyi.showstime.data.source.remote.ShowsApiService;
+import com.bosovskyi.showstime.data.source.api.ShowsApiService;
 import com.bosovskyi.showstime.di.scopes.AppScope;
 
 import dagger.Module;
@@ -17,13 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ShowsApiModule {
 
     private final static String URL = "https://api.themoviedb.org/3/";
-    private final static String API_KEY = "93cf2a3da65fb6b878f0a7b3b1593a32";
-
-    @Provides
-    @AppScope
-    String provideApiKey() {
-        return API_KEY;
-    }
 
     @Provides
     @AppScope

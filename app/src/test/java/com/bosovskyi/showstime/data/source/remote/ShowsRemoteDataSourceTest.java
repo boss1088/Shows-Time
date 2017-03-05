@@ -1,10 +1,14 @@
 package com.bosovskyi.showstime.data.source.remote;
 
+import com.bosovskyi.showstime.data.source.api.ApiConstants;
+import com.bosovskyi.showstime.data.source.api.ShowsApiService;
 import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
 import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +24,15 @@ import static org.mockito.Mockito.when;
  */
 public class ShowsRemoteDataSourceTest {
 
-
+    @Mock
     ShowsApiService service;
-    String apiKey;
 
-    ShowsRemoteDataSource remoteDataSource;
-    ShowsResponseEntity expectedResult;
+    private ShowsRemoteDataSource remoteDataSource;
+    private ShowsResponseEntity expectedResult;
 
     @Before
     public void setUp() throws Exception {
-        service = mock(ShowsApiService.class);
-        apiKey = "mockApiKey";
+        MockitoAnnotations.initMocks(this);
 
         ShowShortEntity showShortEntity = new ShowShortEntity();
         showShortEntity.name = "Test name";
@@ -44,14 +46,14 @@ public class ShowsRemoteDataSourceTest {
         expectedResult.page = 1;
         expectedResult.totalPages = 1;
 
-        remoteDataSource = new ShowsRemoteDataSource(service, apiKey);
+        remoteDataSource = new ShowsRemoteDataSource(service);
     }
 
     @Test
     public void getTopRatedShowsTest() {
         TestObserver<ShowsResponseEntity> testObserver = new TestObserver<>();
 
-        when(service.getTvTopRated(apiKey)).thenReturn(Observable.just(expectedResult));
+        when(service.getTvTopRated(ApiConstants.API_KEY)).thenReturn(Observable.just(expectedResult));
 
         remoteDataSource.getTopRatedShows()
                 .subscribe(testObserver);

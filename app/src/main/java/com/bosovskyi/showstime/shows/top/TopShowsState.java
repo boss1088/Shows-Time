@@ -12,15 +12,15 @@ import java.util.List;
 /**
  * Created by boss1088 on 2/28/17.
  */
-public class TopShowsStateImpl implements StateObject {
+public class TopShowsState implements StateObject {
 
     List<ShowShortEntity> topShows = new ArrayList<>();
     int page;
     int totalPages;
 
-    public TopShowsStateImpl() {}
+    public TopShowsState() {}
 
-    private TopShowsStateImpl(Parcel in) {
+    private TopShowsState(Parcel in) {
         if (in.readByte() == 0x01) {
             topShows = new ArrayList<>();
             in.readList(topShows, ShowShortEntity.class.getClassLoader());
@@ -49,15 +49,15 @@ public class TopShowsStateImpl implements StateObject {
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<TopShowsStateImpl> CREATOR = new Parcelable.Creator<TopShowsStateImpl>() {
+    public static final Parcelable.Creator<TopShowsState> CREATOR = new Parcelable.Creator<TopShowsState>() {
         @Override
-        public TopShowsStateImpl createFromParcel(Parcel in) {
-            return new TopShowsStateImpl(in);
+        public TopShowsState createFromParcel(Parcel in) {
+            return new TopShowsState(in);
         }
 
         @Override
-        public TopShowsStateImpl[] newArray(int size) {
-            return new TopShowsStateImpl[size];
+        public TopShowsState[] newArray(int size) {
+            return new TopShowsState[size];
         }
     };
 }

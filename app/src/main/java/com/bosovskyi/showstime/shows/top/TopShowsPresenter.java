@@ -1,52 +1,41 @@
 package com.bosovskyi.showstime.shows.top;
 
-import com.bosovskyi.showstime.data.source.ShowsRepository;
-import com.bosovskyi.showstime.library.presentation.mvp.presenter.StatePresenter;
+import com.bosovskyi.showstime.data.interactor.shows.GetTopShowsInteractor;
 import com.bosovskyi.showstime.library.presentation.mvp.presenter.impl.StatePresenterImpl;
-import com.bosovskyi.showstime.util.schedulers.BaseSchedulerProvider;
 
 import javax.inject.Inject;
-
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by boss1088 on 2/28/17.
  */
 
-public class TopShowsPresenter extends StatePresenterImpl<TopShowsContract.View, TopShowsStateImpl>
+public class TopShowsPresenter extends StatePresenterImpl<TopShowsContract.View, TopShowsState>
         implements TopShowsContract.Presenter {
 
-    private final ShowsRepository mShowsRepository;
-    private final BaseSchedulerProvider mSchedulerProvider;
+    private final GetTopShowsInteractor getTopShowsInteractor;
 
     @Inject
-    TopShowsPresenter(ShowsRepository repository,
-                      BaseSchedulerProvider schedulerProvider) {
-        mShowsRepository = repository;
-        mSchedulerProvider = schedulerProvider;
+    TopShowsPresenter(GetTopShowsInteractor getTopShowsInteractor) {
+        this.getTopShowsInteractor = getTopShowsInteractor;
     }
 
     @Override
-    public void bind(TopShowsContract.View view, TopShowsStateImpl topShowsState) {
+    public void bind(TopShowsContract.View view, TopShowsState topShowsState) {
         super.bind(view, topShowsState);
     }
 
     @Override
     public void loadTopShows() {
-        view.setLoadingIndicator(true);
-
-        disposable.add(
-                mShowsRepository.getTopRatedShows()
-                        .subscribeOn(mSchedulerProvider.computation())
-                        .observeOn(mSchedulerProvider.ui())
+        compositeDisposable.add(
+                getTopShowsInteractor.get()
+                        .doOnSubscribe(disposable1 -> view.setLoadingIndicator(true))
+                        .doOnTerminate(() -> view.setLoadingIndicator(false))
                         .subscribe(
                                 showsResponseEntity -> {
                                     state.page = showsResponseEntity.page;
                                     state.totalPages = showsResponseEntity.totalPages;
+                                    view.updateItems(showsResponseEntity.shows);
                                 },
-                                throwable -> {
-
-                                },
-                                () -> view.setLoadingIndicator(false)));
+                                throwable -> view.showErrorMessage(throwable.getMessage())));
     }
 }
