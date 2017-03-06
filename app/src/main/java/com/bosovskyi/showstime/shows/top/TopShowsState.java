@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
 import com.bosovskyi.showstime.library.presentation.mvp.state.StateObject;
+import com.bosovskyi.showstime.library.presentation.mvp.state.impl.StateObjectImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +13,18 @@ import java.util.List;
 /**
  * Created by boss1088 on 2/28/17.
  */
-public class TopShowsState implements StateObject {
+public class TopShowsState extends StateObjectImpl {
 
     List<ShowShortEntity> topShows = new ArrayList<>();
     int page;
     int totalPages;
 
-    public TopShowsState() {}
+    public TopShowsState() {
+        super();
+    }
 
     private TopShowsState(Parcel in) {
+        super(in);
         if (in.readByte() == 0x01) {
             topShows = new ArrayList<>();
             in.readList(topShows, ShowShortEntity.class.getClassLoader());

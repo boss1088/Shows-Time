@@ -14,6 +14,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -55,7 +56,7 @@ public class TopShowsPresenterTest {
     }
 
     @Test
-    public void loadTopShowsSuccess() {
+    public void testLoadTopShowsSuccess() {
         when(interactor.get()).thenReturn(Observable.just(expectedResult));
 
         presenter.loadTopShows();
@@ -70,7 +71,30 @@ public class TopShowsPresenterTest {
     }
 
     @Test
-    public void loadTopShowsError() {
+    public void testLoadTopShowsAfterRotate() {
+        given(interactor.get()).willReturn(Observable.just(expectedResult));
+
+        presenter.loadTopShows();
+
+        verify(presenter.view()).setLoadingIndicator(true);
+
+        verify(presenter.view()).updateItems(expectedResult.shows);
+
+        verify(presenter.view()).setLoadingIndicator(false);
+
+        assertEquals(presenter.state().page, 1);
+        assertEquals(presenter.state().loadedFirstTime, true);
+
+        presenter.unbind();
+        presenter.bind(view, presenter.state());
+        presenter.loadTopShows();
+
+        assertEquals(presenter.state().loadedFirstTime, true);
+        assertEquals(presenter.hasSubscriptions(), false);
+    }
+
+    @Test
+    public void testLoadTopShowsError() {
         Exception exception = new Exception("Exception");
         when(interactor.get()).thenReturn(Observable.error(exception));
 

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,4 +63,16 @@ public abstract class BaseFragment<BINDING extends ViewDataBinding,
     protected abstract PRESENTER presenter();
 
     protected abstract VIEW view();
+
+    protected void showSnackbarWithMessage(@StringRes int message) {
+        if (getView() != null) {
+            Snackbar.make(getView(), getResources().getString(message), Snackbar.LENGTH_SHORT);
+        }
+    }
+
+    protected void showSnackbarWithMessage(String message) {
+        if (getView() != null) {
+            Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT);
+        }
+    }
 }

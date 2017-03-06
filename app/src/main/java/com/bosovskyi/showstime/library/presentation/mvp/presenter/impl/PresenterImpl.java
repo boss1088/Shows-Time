@@ -29,4 +29,8 @@ public abstract class PresenterImpl<VIEW extends BaseView> implements Presenter<
     public VIEW view() {
         return view;
     }
+
+    public boolean hasSubscriptions() {
+        return compositeDisposable.size() != 0;
+    }
 }

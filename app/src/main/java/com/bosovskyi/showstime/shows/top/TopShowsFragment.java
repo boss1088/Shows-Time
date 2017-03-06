@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.bosovskyi.showstime.R;
@@ -68,17 +69,24 @@ public class TopShowsFragment
 
     @Override
     public void setLoadingIndicator(boolean active) {
-
+        if (active) {
+            binding.contentLoading.loading.setVisibility(View.VISIBLE);
+            binding.contentView.setVisibility(View.GONE);
+        } else {
+            binding.contentView.setVisibility(View.VISIBLE);
+            binding.contentLoading.loading.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void showErrorMessage(String message) {
-
+        showSnackbarWithMessage(message);
     }
 
     @Override
     public void updateItems(List<ShowShortEntity> entities) {
-
+        state.topShows = entities;
+        binding.resultText.setText(state.topShows.get(0).name);
     }
 
     @Override

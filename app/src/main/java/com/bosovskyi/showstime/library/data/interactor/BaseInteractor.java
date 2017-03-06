@@ -21,6 +21,6 @@ public abstract class BaseInteractor<RESPONSE_DATA, REQUEST_DATA> {
     public Observable<RESPONSE_DATA> get(REQUEST_DATA data) {
         return this.buildUseCaseObservable(data)
                 .subscribeOn(schedulerProvider.computation())
-                .subscribeOn(schedulerProvider.ui());
+                .observeOn(schedulerProvider.ui());
     }
 }
