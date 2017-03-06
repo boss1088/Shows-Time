@@ -3,6 +3,7 @@ package com.bosovskyi.showstime.shows.top;
 import com.bosovskyi.showstime.data.interactor.shows.GetTopShowsInteractor;
 import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
 import com.bosovskyi.showstime.library.presentation.mvp.presenter.impl.StatePresenterImpl;
+import com.bosovskyi.showstime.util.EspressoIdlingResource;
 
 import java.util.List;
 
@@ -43,10 +44,16 @@ public class TopShowsPresenter extends StatePresenterImpl<TopShowsContract.View,
     }
 
     public void load() {
+        EspressoIdlingResource.increment();
         compositeDisposable.add(
                 getTopShowsInteractor.get()
                         .doOnSubscribe(disposable -> view.setLoadingIndicator(true))
-                        .doOnTerminate(() -> view.setLoadingIndicator(false))
+                        .doOnTerminate(() -> {
+                            if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+                                EspressoIdlingResource.decrement();
+                            }
+                            view.setLoadingIndicator(false);
+                        })
                         .subscribe(
                                 showsResponseEntity -> {
                                     state.page = showsResponseEntity.page;

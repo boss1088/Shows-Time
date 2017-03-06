@@ -25,10 +25,12 @@ ext {
     //Testing libraries
     jUnitVersion = '4.12'
     mockitoVersion = '2.7.11'
+    espressoVersion = '2.2.2'
 
     globalDependencies = [
             appcompat             : "com.android.support:appcompat-v7:${appcompatVersion}",
             design                : "com.android.support:design:${designVersion}",
+            recyclerView          : "com.android.support:recyclerview-v7:${appcompatVersion}",
             daggerCompiler        : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger                : "com.google.dagger:dagger:${daggerVersion}",
             daggerAndroid         : "com.google.dagger:dagger-android:${daggerVersion}",
@@ -38,7 +40,8 @@ ext {
             javaxInject           : "javax.inject:javax.inject:${javaxInjectVersion}",
             retrofit              : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitGsonConvertor : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            retrofitRxAdapter2    : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+            retrofitRxAdapter2    : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            espressoIdlingRes     :"com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}"
     ]
 
     globalTestDependencies = [

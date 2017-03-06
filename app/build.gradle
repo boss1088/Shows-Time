@@ -66,16 +66,16 @@ android {
     productFlavors {
         dev {
             signingConfig signingConfigs.debug
-            versionCode globalConfiguration.getAt("androidVersionCode")
-            versionName globalConfiguration.getAt("androidVersionName")
-            applicationId globalConfiguration.getAt("androidApplicationIdDev")
+            versionCode globalConfiguration["androidVersionCode"]
+            versionName globalConfiguration["androidVersionName"]
+            applicationId globalConfiguration["androidApplicationIdDev"]
         }
 
         prod {
             signingConfig signingConfigs.release
-            versionCode globalConfiguration.getAt("androidVersionCode")
-            versionName globalConfiguration.getAt("androidVersionName")
-            applicationId globalConfiguration.getAt("androidApplicationId")
+            versionCode globalConfiguration["androidVersionCode"]
+            versionName globalConfiguration["androidVersionName"]
+            applicationId globalConfiguration["androidApplicationId"]
         }
     }
 
@@ -88,6 +88,7 @@ android {
 dependencies {
     compile globalDependencies.appcompat
     compile globalDependencies.design
+    compile globalDependencies.recyclerView
 
     compile globalDependencies.dagger
     annotationProcessor globalDependencies.daggerCompiler
@@ -100,6 +101,8 @@ dependencies {
     compile globalDependencies.rxJava2
     compile globalDependencies.rxAndroid2
     compile globalDependencies.retrofitRxAdapter2
+
+    compile globalDependencies.espressoIdlingRes
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
