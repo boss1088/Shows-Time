@@ -16,8 +16,15 @@ public interface ShowsApiService {
 
     String API_TV_TOP_RATED = "tv/top_rated";
 
+    String API_TV_POPULAR = "tv/popular";
+
     @GET(API_TV_TOP_RATED)
     Observable<ShowsResponseEntity> getTvTopRated(
+            @Query(FIELD_API_KEY) String apiKey
+    );
+
+    @GET(API_TV_POPULAR)
+    Observable<ShowsResponseEntity> getTvPopular(
             @Query(FIELD_API_KEY) String apiKey
     );
 

@@ -12,6 +12,7 @@ ext {
     androidCompileSdkVersion = 25
     appcompatVersion = "25.1.1"
     designVersion = "25.1.1"
+    glideVersion = "3.7.0"
 
     //Libraries
     daggerVersion = '2.9'
@@ -30,7 +31,9 @@ ext {
     globalDependencies = [
             appcompat             : "com.android.support:appcompat-v7:${appcompatVersion}",
             design                : "com.android.support:design:${designVersion}",
+            palette               : "com.android.support:palette-v7:${appcompatVersion}",
             recyclerView          : "com.android.support:recyclerview-v7:${appcompatVersion}",
+            glide                 : "com.github.bumptech.glide:glide:${glideVersion}",
             daggerCompiler        : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger                : "com.google.dagger:dagger:${daggerVersion}",
             daggerAndroid         : "com.google.dagger:dagger-android:${daggerVersion}",

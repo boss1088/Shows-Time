@@ -48,7 +48,7 @@ public class TopShowsPresenter extends StatePresenterImpl<TopShowsContract.View,
         compositeDisposable.add(
                 getTopShowsInteractor.get()
                         .doOnSubscribe(disposable -> view.setLoadingIndicator(true))
-                        .doOnTerminate(() -> {
+                        .doFinally(() -> {
                             if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
                                 EspressoIdlingResource.decrement();
                             }

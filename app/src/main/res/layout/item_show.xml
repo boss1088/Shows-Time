@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:orientation="vertical"
+        android:layout_margin="@dimen/dimen_grid_item_shows_padding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/showCover"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_grid_item_show_height" />
+
+        <LinearLayout
+            android:id="@+id/infoBackground"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/dimen_grid_item_data_height"
+            android:padding="@dimen/grid_item_data_padding"
+            android:background="@android:color/transparent"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/showName"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="16sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Suits"/>
+
+            <TextView
+                android:id="@+id/showRating"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="12sp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:drawableLeft="@drawable/ic_star_rate_white_18dp"
+                android:drawableStart="@drawable/ic_star_rate_white_18dp"
+                android:drawablePadding="2dp"
+                tools:text="8.9"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</layout>

@@ -1,9 +1,11 @@
 package com.bosovskyi.showstime.shows.top;
 
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
 import com.bosovskyi.showstime.databinding.FragmentTopTvShowsBinding;
 import com.bosovskyi.showstime.library.presentation.ui.fragment.BaseStateFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,6 +34,8 @@ public class TopShowsFragment
     @Inject
     Resources resources;
 
+    private TopShowsAdapter topShowsAdapter;
+
     public static TopShowsFragment newInstance() {
         return new TopShowsFragment();
     }
@@ -38,6 +43,26 @@ public class TopShowsFragment
     @Override
     protected void callInjection() {
         getInjector().inject(this);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        topShowsAdapter = new TopShowsAdapter(new ArrayList<>(), this);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        int coloumnCount = 2;
+        if (resources.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            coloumnCount = 3;
+        }
+
+        binding.topShowsRecycler.setLayoutManager(new GridLayoutManager(getContext(), coloumnCount));
+        binding.topShowsRecycler.setAdapter(topShowsAdapter);
     }
 
     @Override
@@ -86,11 +111,16 @@ public class TopShowsFragment
     @Override
     public void updateItems(List<ShowShortEntity> entities) {
         state.topShows = entities;
-        binding.resultText.setText(state.topShows.get(0).name);
+        topShowsAdapter.replaceItems(state.topShows);
     }
 
     @Override
     public void addItems(List<ShowShortEntity> entities) {
+
+    }
+
+    @Override
+    public void showSelected(ShowShortEntity entity) {
 
     }
 }
