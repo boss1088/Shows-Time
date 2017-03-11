@@ -1,4 +1,4 @@
-package com.bosovskyi.showstime.util;
+package com.bosovskyi.showstime.util.glide;
 
 import android.graphics.Bitmap;
 import android.support.v4.content.ContextCompat;
@@ -6,6 +6,7 @@ import android.support.v7.graphics.Palette;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -33,13 +34,14 @@ public class GlideUtil {
                 .into(view);
     }
 
-    public static void loadShowImageToViewWithBackgroundPalette(ImageView view, View background, String urlPath) {
+    public static void loadShowImageToViewWithBackgroundPalette(ImageView view, ProgressBar progressBar, View background, String urlPath) {
         if (TextUtils.isEmpty(urlPath)) {
             return;
         }
 
         final int defaultColor = ContextCompat.getColor(view.getContext(), android.R.color.black);
         String url = BASE_URL + urlPath;
+        progressBar.setVisibility(View.VISIBLE);
         Glide.with(view.getContext())
                 .load(url)
                 .asBitmap()
@@ -53,6 +55,7 @@ public class GlideUtil {
 
                     @Override
                     public boolean onResourceReady(Bitmap resource, String model, Target<Bitmap> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
                         updateBackgroundColorWithPaletteDarkMuted(resource, background, defaultColor);
                         return false;
                     }

@@ -8,11 +8,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/showCover"
-            android:scaleType="centerCrop"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_grid_item_show_height" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/showCover"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_grid_item_show_height" />
+
+            <ProgressBar
+                android:id="@+id/imageLoading"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/dimen_small_progress"
+                android:layout_height="@dimen/dimen_small_progress" />
+
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/infoBackground"

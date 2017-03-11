@@ -47,10 +47,6 @@ public class TopShowsPresenter extends StatePresenterImpl<TopShowsContract.View,
                             if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
                                 EspressoIdlingResource.decrement();
                             }
-
-                            if (view != null) {
-                                view.setLoadingIndicator(false);
-                            }
                         })
                         .subscribe(
                                 showsResponseEntity -> {
@@ -61,7 +57,12 @@ public class TopShowsPresenter extends StatePresenterImpl<TopShowsContract.View,
                                     }
                                     state.loadedFirstTime = true;
                                 },
-                                throwable -> view.showErrorMessage(throwable.getMessage())));
+                                throwable -> view.showErrorMessage(throwable.getMessage()),
+                                () -> {
+                                    if (view != null) {
+                                        view.setLoadingIndicator(false);
+                                    }
+                                }));
     }
 
     @Override
