@@ -53,7 +53,7 @@ public class ShowsRemoteDataSourceTest {
     public void getTopRatedShowsTest() {
         TestObserver<ShowsResponseEntity> testObserver = new TestObserver<>();
 
-        when(service.getTvTopRated(ApiConstants.API_KEY)).thenReturn(Observable.just(expectedResult));
+        when(service.getTvTopRated(ApiConstants.API_KEY, null)).thenReturn(Observable.just(expectedResult));
 
         remoteDataSource.getTopRatedShows()
                 .subscribe(testObserver);

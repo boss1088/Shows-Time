@@ -18,6 +18,7 @@ public class TopShowsState extends StateObjectImpl {
     List<ShowShortEntity> topShows = new ArrayList<>();
     int page;
     int totalPages;
+    public boolean loadingMore;
 
     public TopShowsState() {
         super();
@@ -33,6 +34,7 @@ public class TopShowsState extends StateObjectImpl {
         }
         page = in.readInt();
         totalPages = in.readInt();
+        loadingMore = in.readByte() != 0x00;
     }
 
     @Override
@@ -50,6 +52,7 @@ public class TopShowsState extends StateObjectImpl {
         }
         dest.writeInt(page);
         dest.writeInt(totalPages);
+        dest.writeByte((byte) (loadingMore ? 0x01 : 0x00));
     }
 
     @SuppressWarnings("unused")

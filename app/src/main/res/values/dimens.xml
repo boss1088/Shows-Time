@@ -6,4 +6,5 @@
     <dimen name="grid_item_data_padding">16dp</dimen>
     <dimen name="dimen_grid_item_shows_padding">2dp</dimen>
     <dimen name="dimen_grid_item_show_height">256dp</dimen>
+    <dimen name="dimen_small_progress">25dp</dimen>
 </resources>

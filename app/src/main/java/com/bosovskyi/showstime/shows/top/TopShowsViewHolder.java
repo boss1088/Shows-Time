@@ -1,10 +1,7 @@
 package com.bosovskyi.showstime.shows.top;
 
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
-import com.bosovskyi.showstime.R;
 import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
 import com.bosovskyi.showstime.databinding.ItemShowBinding;
 import com.bosovskyi.showstime.library.presentation.ui.viewholder.BaseViewHolder;
@@ -26,6 +23,7 @@ public class TopShowsViewHolder extends BaseViewHolder<ItemShowBinding, ShowShor
     @Override
     public void bind(ShowShortEntity showShortEntity, int position) {
         View root = binding.getRoot();
+
         GlideUtil.loadShowImageToViewWithBackgroundPalette(binding.showCover, binding.infoBackground, showShortEntity.posterPath);
         binding.showName.setText(showShortEntity.name);
         binding.showRating.setText(String.valueOf(showShortEntity.voteAverage));

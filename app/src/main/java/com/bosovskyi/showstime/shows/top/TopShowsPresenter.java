@@ -31,36 +31,59 @@ public class TopShowsPresenter extends StatePresenterImpl<TopShowsContract.View,
     @Override
     public void loadTopShows() {
         if (state.loadedFirstTime) {
-            topShowsLoaded();
+            view.setLoadingIndicator(false);
             return;
         }
 
         load();
     }
 
-    public void topShowsLoaded() {
-        view.updateItems(state.topShows);
-        view.setLoadingIndicator(false);
-    }
-
     public void load() {
         EspressoIdlingResource.increment();
         compositeDisposable.add(
-                getTopShowsInteractor.get()
+                getTopShowsInteractor.get(null)
                         .doOnSubscribe(disposable -> view.setLoadingIndicator(true))
                         .doFinally(() -> {
                             if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
                                 EspressoIdlingResource.decrement();
                             }
-                            view.setLoadingIndicator(false);
+
+                            if (view != null) {
+                                view.setLoadingIndicator(false);
+                            }
                         })
                         .subscribe(
                                 showsResponseEntity -> {
                                     state.page = showsResponseEntity.page;
                                     state.totalPages = showsResponseEntity.totalPages;
-                                    view.updateItems(showsResponseEntity.shows);
+                                    if (view != null) {
+                                        view.updateItems(showsResponseEntity.shows);
+                                    }
                                     state.loadedFirstTime = true;
                                 },
                                 throwable -> view.showErrorMessage(throwable.getMessage())));
+    }
+
+    @Override
+    public void loadMore() {
+        if (state.loadingMore || state.page == state.totalPages) {
+            return;
+        }
+
+        state.loadingMore = true;
+        compositeDisposable.add(
+                getTopShowsInteractor.get(state.page + 1)
+                        .doOnSubscribe(disposable -> view.addLoadingView())
+                        .doFinally(() -> state.loadingMore = false)
+                        .subscribe(
+                                showsResponseEntity -> {
+                                    state.page = showsResponseEntity.page;
+                                    state.totalPages = showsResponseEntity.totalPages;
+                                    view.addItems(showsResponseEntity.shows);
+                                },
+                                throwable -> {
+                                    view.removeLoadingView();
+                                    view.showErrorMessage(throwable.getMessage());
+                                }));
     }
 }

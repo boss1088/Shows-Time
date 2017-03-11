@@ -3,6 +3,7 @@ package com.bosovskyi.showstime.shows.top;
 import com.bosovskyi.showstime.data.interactor.shows.GetTopShowsInteractor;
 import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
 import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
+import com.bosovskyi.showstime.tools.ObjectBuilder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,22 +35,14 @@ public class TopShowsPresenterTest {
     private TopShowsPresenter presenter;
 
     private ShowsResponseEntity expectedResult;
+    private ShowsResponseEntity expectedMoreResult;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        ShowShortEntity showShortEntity = new ShowShortEntity();
-        showShortEntity.name = "Test name";
-        showShortEntity.id = 1;
-
-        List<ShowShortEntity> list = new ArrayList<>();
-        list.add(showShortEntity);
-
-        expectedResult = new ShowsResponseEntity();
-        expectedResult.shows = list;
-        expectedResult.page = 1;
-        expectedResult.totalPages = 1;
+        expectedResult = ObjectBuilder.getShowsFirstTimeResponse();
+        expectedMoreResult = ObjectBuilder.getMoreShowsResponse();
 
         presenter = new TopShowsPresenter(interactor);
         presenter.bind(view, new TopShowsState());
@@ -57,7 +50,7 @@ public class TopShowsPresenterTest {
 
     @Test
     public void testLoadTopShowsSuccess() {
-        when(interactor.get()).thenReturn(Observable.just(expectedResult));
+        when(interactor.get(null)).thenReturn(Observable.just(expectedResult));
 
         presenter.loadTopShows();
 
@@ -71,8 +64,33 @@ public class TopShowsPresenterTest {
     }
 
     @Test
+    public void testLoadMoreShowsSuccess() {
+        when(interactor.get(null)).thenReturn(Observable.just(expectedResult));
+
+        presenter.loadTopShows();
+
+        verify(presenter.view()).setLoadingIndicator(true);
+
+        verify(presenter.view()).updateItems(expectedResult.shows);
+
+        verify(presenter.view()).setLoadingIndicator(false);
+
+        assertEquals(presenter.state().page, 1);
+
+        when(interactor.get(presenter.state().page + 1)).thenReturn(Observable.just(expectedMoreResult));
+
+        presenter.loadMore();
+
+        verify(presenter.view()).addLoadingView();
+
+        verify(presenter.view()).addItems(expectedMoreResult.shows);
+
+        assertEquals(presenter.state().page, 2);
+    }
+
+    @Test
     public void testLoadTopShowsAfterRotate() {
-        given(interactor.get()).willReturn(Observable.just(expectedResult));
+        given(interactor.get(null)).willReturn(Observable.just(expectedResult));
 
         presenter.loadTopShows();
 
@@ -96,7 +114,7 @@ public class TopShowsPresenterTest {
     @Test
     public void testLoadTopShowsError() {
         Exception exception = new Exception("Exception");
-        when(interactor.get()).thenReturn(Observable.error(exception));
+        when(interactor.get(null)).thenReturn(Observable.error(exception));
 
         presenter.loadTopShows();
 

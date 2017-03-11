@@ -11,9 +11,20 @@ import java.util.ArrayList;
 
 public class ObjectBuilder {
 
-    public static ShowsResponseEntity getTopShowsResponse() {
+    public static ShowsResponseEntity getShowsFirstTimeResponse() {
         ShowsResponseEntity showsResponseEntity = new ShowsResponseEntity();
         showsResponseEntity.page = 1;
+        showsResponseEntity.totalPages = 2;
+        showsResponseEntity.shows = new ArrayList<>();
+        showsResponseEntity.shows.add(getShortShowInfo());
+        showsResponseEntity.shows.add(getShortShowInfo());
+
+        return showsResponseEntity;
+    }
+
+    public static ShowsResponseEntity getMoreShowsResponse() {
+        ShowsResponseEntity showsResponseEntity = new ShowsResponseEntity();
+        showsResponseEntity.page = 2;
         showsResponseEntity.totalPages = 2;
         showsResponseEntity.shows = new ArrayList<>();
         showsResponseEntity.shows.add(getShortShowInfo());

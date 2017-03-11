@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 
 import com.bosovskyi.showstime.R;
 import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
+import com.bosovskyi.showstime.databinding.ItemLoadingBinding;
 import com.bosovskyi.showstime.databinding.ItemShowBinding;
+import com.bosovskyi.showstime.library.presentation.ui.viewholder.BaseViewHolder;
+import com.bosovskyi.showstime.library.presentation.ui.viewholder.LoadingViewHolder;
 
 import java.util.List;
 
@@ -15,7 +18,10 @@ import java.util.List;
  * Created by boss1088 on 3/6/17.
  */
 
-public class TopShowsAdapter extends RecyclerView.Adapter<TopShowsViewHolder> {
+public class TopShowsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+
+    public static final int VIEW_SHOW = 0;
+    public static final int VIEW_LOADING = 1;
 
     private List<ShowShortEntity> items;
 
@@ -28,15 +34,24 @@ public class TopShowsAdapter extends RecyclerView.Adapter<TopShowsViewHolder> {
     }
 
     @Override
-    public TopShowsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemShowBinding itemShowBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                R.layout.item_show, parent, false);
-        return new TopShowsViewHolder(itemShowBinding, topShowsView);
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == VIEW_SHOW) {
+            ItemShowBinding itemShowBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                    R.layout.item_show, parent, false);
+            return new TopShowsViewHolder(itemShowBinding, topShowsView);
+        } else {
+            ItemLoadingBinding itemLoadingBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                    R.layout.item_loading, parent, false);
+            return new LoadingViewHolder(itemLoadingBinding);
+        }
     }
 
     @Override
-    public void onBindViewHolder(TopShowsViewHolder holder, int position) {
-        holder.bind(items.get(position), position);
+    @SuppressWarnings("unchecked")
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
+        if (getItemViewType(position) == VIEW_SHOW) {
+            holder.bind(items.get(position), position);
+        }
     }
 
     @Override
@@ -45,16 +60,43 @@ public class TopShowsAdapter extends RecyclerView.Adapter<TopShowsViewHolder> {
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return items.get(position).id == -1 ? VIEW_LOADING : VIEW_SHOW;
+    }
+
+    @Override
     public long getItemId(int position) {
         return items.get(position).id;
     }
 
-    public void setItems(List<ShowShortEntity> items) {
-        this.items = items;
+    public void notifyItemsAdded(List<ShowShortEntity> items) {
+        int startPosition = this.items.size() - items.size();
+
+        notifyItemRangeInserted(startPosition, items.size());
     }
 
-    public void replaceItems(List<ShowShortEntity> items) {
-        setItems(items);
-        notifyDataSetChanged();
+    public void addLoadingMore() {
+        ShowShortEntity loading = new ShowShortEntity();
+        loading.id = -1;
+
+        int insertPosition = items.size();
+        items.add(insertPosition, loading);
+
+        notifyItemInserted(insertPosition);
+    }
+
+    public void removeLoadingMore() {
+        if (items == null || items.size() == 0) {
+            return;
+        }
+
+        if (items.get(items.size() - 1).id == -1) {
+            items.remove(items.size() - 1);
+            notifyItemRemoved(items.size());
+        }
+    }
+
+    public void notifyItemsReplaced(List<ShowShortEntity> items) {
+        notifyItemRangeInserted(0, items.size());
     }
 }

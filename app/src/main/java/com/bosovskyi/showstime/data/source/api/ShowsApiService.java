@@ -12,7 +12,8 @@ import retrofit2.http.Query;
 
 public interface ShowsApiService {
 
-    String FIELD_API_KEY = "api_key";
+    String QUERY_API_KEY = "api_key";
+    String QUERY_PAGE = "page";
 
     String API_TV_TOP_RATED = "tv/top_rated";
 
@@ -20,12 +21,14 @@ public interface ShowsApiService {
 
     @GET(API_TV_TOP_RATED)
     Observable<ShowsResponseEntity> getTvTopRated(
-            @Query(FIELD_API_KEY) String apiKey
+            @Query(QUERY_API_KEY) String apiKey,
+            @Query(QUERY_PAGE) Integer page
     );
 
     @GET(API_TV_POPULAR)
     Observable<ShowsResponseEntity> getTvPopular(
-            @Query(FIELD_API_KEY) String apiKey
+            @Query(QUERY_API_KEY) String apiKey,
+            @Query(QUERY_PAGE) Integer page
     );
 
 }

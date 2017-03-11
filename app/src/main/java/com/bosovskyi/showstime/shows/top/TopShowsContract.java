@@ -23,9 +23,15 @@ public interface TopShowsContract {
         void addItems(List<ShowShortEntity> entities);
 
         void showSelected(ShowShortEntity entity);
+
+        void addLoadingView();
+
+        void removeLoadingView();
     }
 
     interface Presenter extends StatePresenter<View, TopShowsState> {
         void loadTopShows();
+
+        void loadMore();
     }
 }

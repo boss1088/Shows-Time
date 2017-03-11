@@ -34,15 +34,15 @@ public class GetTopShowsInteractorTest {
         MockitoAnnotations.initMocks(this);
         BaseSchedulerProvider schedulerProvider = new TestSchedulerProvider();
         getTopShowsInteractor = new GetTopShowsInteractor(showsService, schedulerProvider);
-        expectedSuccessResult = ObjectBuilder.getTopShowsResponse();
+        expectedSuccessResult = ObjectBuilder.getShowsFirstTimeResponse();
     }
 
     @Test
     public void testGetTopShowsSuccess() {
         TestObserver<ShowsResponseEntity> testObserver = new TestObserver<>();
-        when(showsService.getTvTopRated(ApiConstants.API_KEY)).thenReturn(Observable.just(expectedSuccessResult));
+        when(showsService.getTvTopRated(ApiConstants.API_KEY, null)).thenReturn(Observable.just(expectedSuccessResult));
 
-        getTopShowsInteractor.get().subscribe(testObserver);
+        getTopShowsInteractor.get(null).subscribe(testObserver);
 
         testObserver.assertNoErrors();
         testObserver.assertResult(expectedSuccessResult);
