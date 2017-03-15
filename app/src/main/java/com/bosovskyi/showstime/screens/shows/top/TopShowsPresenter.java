@@ -1,11 +1,8 @@
-package com.bosovskyi.showstime.shows.top;
+package com.bosovskyi.showstime.screens.shows.top;
 
 import com.bosovskyi.showstime.data.interactor.shows.GetTopShowsInteractor;
-import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
-import com.bosovskyi.showstime.library.presentation.mvp.presenter.impl.StatePresenterImpl;
+import com.bosovskyi.showstime.library.presentation.mvp.presenter.impl.StateBasePresenterImpl;
 import com.bosovskyi.showstime.util.EspressoIdlingResource;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -13,8 +10,8 @@ import javax.inject.Inject;
  * Created by boss1088 on 2/28/17.
  */
 
-public class TopShowsPresenter extends StatePresenterImpl<TopShowsContract.View, TopShowsState>
-        implements TopShowsContract.Presenter {
+public class TopShowsPresenter extends StateBasePresenterImpl<TopShowsContract.View, TopShowsState>
+        implements TopShowsContract.BasePresenter {
 
     private final GetTopShowsInteractor getTopShowsInteractor;
 

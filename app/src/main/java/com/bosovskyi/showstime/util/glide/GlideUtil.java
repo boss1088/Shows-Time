@@ -19,7 +19,7 @@ import com.bumptech.glide.request.target.Target;
 
 public class GlideUtil {
 
-    private static final String BASE_URL = "https://image.tmdb.org/t/p/w300";
+    public static final String BASE_URL = "https://image.tmdb.org/t/p/w300";
 
     public static void loadShowImageToView(ImageView view, String urlPath) {
         if (TextUtils.isEmpty(urlPath)) {
@@ -29,8 +29,7 @@ public class GlideUtil {
         String url = BASE_URL + urlPath;
         Glide.with(view.getContext())
                 .load(url)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(view);
     }
 
@@ -42,11 +41,10 @@ public class GlideUtil {
         final int defaultColor = ContextCompat.getColor(view.getContext(), android.R.color.black);
         String url = BASE_URL + urlPath;
         progressBar.setVisibility(View.VISIBLE);
-        Glide.with(view.getContext())
+        Glide.with(view.getContext().getApplicationContext())
                 .load(url)
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .centerCrop()
                 .listener(new RequestListener<String, Bitmap>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<Bitmap> target, boolean isFirstResource) {

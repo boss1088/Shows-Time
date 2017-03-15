@@ -1,4 +1,4 @@
-package com.bosovskyi.showstime.shows.top;
+package com.bosovskyi.showstime.screens.shows.top;
 
 import android.view.View;
 
@@ -28,6 +28,6 @@ public class TopShowsViewHolder extends BaseViewHolder<ItemShowBinding, ShowShor
         binding.showName.setText(showShortEntity.name);
         binding.showRating.setText(String.valueOf(showShortEntity.voteAverage));
 
-        root.setOnClickListener(v -> topShowsView.showSelected(showShortEntity));
+        root.setOnClickListener(v -> topShowsView.showSelected(showShortEntity, binding.showCover));
     }
 }

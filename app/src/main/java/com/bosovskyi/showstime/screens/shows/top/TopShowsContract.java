@@ -1,7 +1,7 @@
-package com.bosovskyi.showstime.shows.top;
+package com.bosovskyi.showstime.screens.shows.top;
 
 import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
-import com.bosovskyi.showstime.library.presentation.mvp.presenter.StatePresenter;
+import com.bosovskyi.showstime.library.presentation.mvp.presenter.StateBasePresenter;
 import com.bosovskyi.showstime.library.presentation.mvp.view.BaseView;
 
 import java.util.List;
@@ -22,14 +22,14 @@ public interface TopShowsContract {
 
         void addItems(List<ShowShortEntity> entities);
 
-        void showSelected(ShowShortEntity entity);
+        void showSelected(ShowShortEntity entity, android.view.View coverView);
 
         void addLoadingView();
 
         void removeLoadingView();
     }
 
-    interface Presenter extends StatePresenter<View, TopShowsState> {
+    interface BasePresenter extends StateBasePresenter<View, TopShowsState> {
         void loadTopShows();
 
         void loadMore();

@@ -4,17 +4,16 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 
-import com.bosovskyi.showstime.library.presentation.ui.activity.BaseActivity;
+import com.bosovskyi.showstime.library.presentation.ui.activity.BaseBindingActivity;
 
 /**
  * Created by boss1088 on 3/1/17.
  */
 @VisibleForTesting
-public class TestActivity extends BaseActivity<ViewDataBinding> {
+public class TestActivity extends BaseBindingActivity<ViewDataBinding> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

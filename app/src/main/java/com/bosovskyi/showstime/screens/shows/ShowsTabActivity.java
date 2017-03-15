@@ -1,4 +1,4 @@
-package com.bosovskyi.showstime.shows;
+package com.bosovskyi.showstime.screens.shows;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -6,11 +6,11 @@ import android.support.v7.widget.Toolbar;
 
 import com.bosovskyi.showstime.R;
 import com.bosovskyi.showstime.databinding.ActivityShowsTabBinding;
-import com.bosovskyi.showstime.library.presentation.ui.activity.BaseActivity;
-import com.bosovskyi.showstime.shows.top.TopShowsFragment;
+import com.bosovskyi.showstime.library.presentation.ui.activity.BaseBindingActivity;
+import com.bosovskyi.showstime.screens.shows.top.TopShowsFragment;
 import com.bosovskyi.showstime.util.ActivityUtils;
 
-public class ShowsTabActivity extends BaseActivity<ActivityShowsTabBinding> {
+public class ShowsTabActivity extends BaseBindingActivity<ActivityShowsTabBinding> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

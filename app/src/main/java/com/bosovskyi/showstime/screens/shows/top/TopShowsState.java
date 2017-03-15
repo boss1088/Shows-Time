@@ -1,10 +1,9 @@
-package com.bosovskyi.showstime.shows.top;
+package com.bosovskyi.showstime.screens.shows.top;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
-import com.bosovskyi.showstime.library.presentation.mvp.state.StateObject;
 import com.bosovskyi.showstime.library.presentation.mvp.state.impl.StateObjectImpl;
 
 import java.util.ArrayList;

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.bosovskyi.showstime.library.presentation.mvp.presenter.StatePresenter;
+import com.bosovskyi.showstime.library.presentation.mvp.presenter.StateBasePresenter;
 import com.bosovskyi.showstime.library.presentation.mvp.state.StateObject;
 import com.bosovskyi.showstime.library.presentation.mvp.view.BaseView;
 
@@ -13,11 +13,11 @@ import com.bosovskyi.showstime.library.presentation.mvp.view.BaseView;
  * Created by boss1088 on 3/2/17.
  */
 
-public abstract class BaseStateFragment<BINDING extends ViewDataBinding,
+public abstract class BaseStateMvpFragment<BINDING extends ViewDataBinding,
                                         VIEW extends BaseView,
                                         STATE extends StateObject,
-                                        PRESENTER extends StatePresenter<VIEW, STATE>>
-        extends BaseFragment<BINDING, VIEW, PRESENTER> {
+                                        PRESENTER extends StateBasePresenter<VIEW, STATE>>
+        extends BaseMvpFragment<BINDING, VIEW, PRESENTER> {
 
     protected STATE state;
 

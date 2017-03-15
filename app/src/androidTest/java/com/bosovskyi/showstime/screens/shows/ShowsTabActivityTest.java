@@ -1,4 +1,4 @@
-package com.bosovskyi.showstime.shows;
+package com.bosovskyi.showstime.screens.shows;
 
 
 import android.support.test.espresso.ViewInteraction;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import com.bosovskyi.showstime.R;
-import com.bosovskyi.showstime.shows.top.TopShowsFragment;
+import com.bosovskyi.showstime.screens.shows.top.TopShowsFragment;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

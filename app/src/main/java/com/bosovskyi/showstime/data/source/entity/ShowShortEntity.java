@@ -1,6 +1,7 @@
 
 package com.bosovskyi.showstime.data.source.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -40,11 +41,11 @@ public class ShowShortEntity implements Parcelable {
 
     @SerializedName("origin_country")
     @Expose
-    public List<String> originCountry = null;
+    public List<String> originCountry;
 
     @SerializedName("genre_ids")
     @Expose
-    public List<Long> genreIds = null;
+    public List<Long> genreIds;
 
     @SerializedName("original_language")
     @Expose
@@ -77,8 +78,18 @@ public class ShowShortEntity implements Parcelable {
             instance.voteAverage = ((double) in.readValue((double.class.getClassLoader())));
             instance.overview = ((String) in.readValue((String.class.getClassLoader())));
             instance.firstAirDate = ((String) in.readValue((String.class.getClassLoader())));
-            in.readList(instance.originCountry, (String.class.getClassLoader()));
-            in.readList(instance.genreIds, (Long.class.getClassLoader()));
+            if (in.readByte() == 0x01) {
+                instance.originCountry = new ArrayList<>();
+                in.readList(instance.originCountry, ShowShortEntity.class.getClassLoader());
+            } else {
+                instance.originCountry = null;
+            }
+            if (in.readByte() == 0x01) {
+                instance.genreIds = new ArrayList<>();
+                in.readList(instance.genreIds, ShowShortEntity.class.getClassLoader());
+            } else {
+                instance.genreIds = null;
+            }
             instance.originalLanguage = ((String) in.readValue((String.class.getClassLoader())));
             instance.voteCount = ((long) in.readValue((long.class.getClassLoader())));
             instance.name = ((String) in.readValue((String.class.getClassLoader())));
@@ -101,8 +112,18 @@ public class ShowShortEntity implements Parcelable {
         dest.writeValue(voteAverage);
         dest.writeValue(overview);
         dest.writeValue(firstAirDate);
-        dest.writeList(originCountry);
-        dest.writeList(genreIds);
+        if (originCountry == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(originCountry);
+        }
+        if (genreIds == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(genreIds);
+        }
         dest.writeValue(originalLanguage);
         dest.writeValue(voteCount);
         dest.writeValue(name);

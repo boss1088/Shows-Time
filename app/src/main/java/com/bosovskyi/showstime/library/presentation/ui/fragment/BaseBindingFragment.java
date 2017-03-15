@@ -1,6 +1,5 @@
 package com.bosovskyi.showstime.library.presentation.ui.fragment;
 
-import android.content.Context;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,30 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bosovskyi.showstime.di.components.Injector;
-import com.bosovskyi.showstime.library.presentation.mvp.presenter.Presenter;
-import com.bosovskyi.showstime.library.presentation.mvp.view.BaseView;
-import com.bosovskyi.showstime.library.presentation.ui.activity.BaseActivity;
-
 /**
- * Created by boss1088 on 3/2/17.
+ * Created by boss1088 on 3/15/17.
  */
 
-public abstract class BaseFragment<BINDING extends ViewDataBinding,
-                                    VIEW extends BaseView,
-                                    PRESENTER extends Presenter<VIEW>>
-        extends Fragment {
+public abstract class BaseBindingFragment<BINDING extends ViewDataBinding> extends Fragment {
 
     protected BINDING binding;
-
-    protected abstract void callInjection();
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        callInjection();
-    }
 
     @Nullable
     @Override
@@ -43,26 +25,7 @@ public abstract class BaseFragment<BINDING extends ViewDataBinding,
         return binding.getRoot();
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        presenter().bind(view());
-    }
-
-    @Override
-    public void onDestroyView() {
-        presenter().unbind();
-        super.onDestroyView();
-    }
-
-    protected Injector getInjector() {
-        return ((BaseActivity)getActivity()).getInjector();
-    }
-
     protected abstract BINDING initBinding(LayoutInflater inflater, @Nullable ViewGroup container);
-
-    protected abstract PRESENTER presenter();
-
-    protected abstract VIEW view();
 
     protected void showSnackbarWithMessage(@StringRes int message) {
         if (getView() != null) {

@@ -1,7 +1,6 @@
-package com.bosovskyi.showstime.shows.top;
+package com.bosovskyi.showstime.screens.shows.top;
 
 import com.bosovskyi.showstime.data.interactor.shows.GetTopShowsInteractor;
-import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
 import com.bosovskyi.showstime.data.source.entity.ShowsResponseEntity;
 import com.bosovskyi.showstime.tools.ObjectBuilder;
 
@@ -9,9 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.Observable;
 

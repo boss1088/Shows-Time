@@ -1,4 +1,4 @@
-package com.bosovskyi.showstime.shows.top;
+package com.bosovskyi.showstime.screens.shows.top;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;

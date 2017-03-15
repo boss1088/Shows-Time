@@ -1,6 +1,6 @@
 package com.bosovskyi.showstime.library.presentation.mvp.presenter.impl;
 
-import com.bosovskyi.showstime.library.presentation.mvp.presenter.Presenter;
+import com.bosovskyi.showstime.library.presentation.mvp.presenter.BasePresenter;
 import com.bosovskyi.showstime.library.presentation.mvp.view.BaseView;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -9,7 +9,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by boss1088 on 3/2/17.
  */
 
-public abstract class PresenterImpl<VIEW extends BaseView> implements Presenter<VIEW> {
+public abstract class BasePresenterImpl<VIEW extends BaseView> implements BasePresenter<VIEW> {
 
     protected VIEW view;
 

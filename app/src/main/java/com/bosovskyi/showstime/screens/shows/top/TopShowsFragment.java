@@ -1,11 +1,14 @@
-package com.bosovskyi.showstime.shows.top;
+package com.bosovskyi.showstime.screens.shows.top;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +18,8 @@ import android.view.ViewGroup;
 import com.bosovskyi.showstime.R;
 import com.bosovskyi.showstime.data.source.entity.ShowShortEntity;
 import com.bosovskyi.showstime.databinding.FragmentTopTvShowsBinding;
-import com.bosovskyi.showstime.library.presentation.ui.fragment.BaseStateFragment;
+import com.bosovskyi.showstime.library.presentation.ui.fragment.BaseStateMvpFragment;
+import com.bosovskyi.showstime.screens.details.ShowDetailsActivity;
 
 import java.util.List;
 
@@ -26,7 +30,7 @@ import javax.inject.Inject;
  */
 
 public class TopShowsFragment
-        extends BaseStateFragment<FragmentTopTvShowsBinding, TopShowsContract.View, TopShowsState, TopShowsContract.Presenter>
+        extends BaseStateMvpFragment<FragmentTopTvShowsBinding, TopShowsContract.View, TopShowsState, TopShowsContract.BasePresenter>
         implements TopShowsContract.View {
 
     @Inject
@@ -106,7 +110,7 @@ public class TopShowsFragment
     }
 
     @Override
-    protected TopShowsContract.Presenter presenter() {
+    protected TopShowsContract.BasePresenter presenter() {
         return presenter;
     }
 
@@ -166,8 +170,8 @@ public class TopShowsFragment
     }
 
     @Override
-    public void showSelected(ShowShortEntity entity) {
-
+    public void showSelected(ShowShortEntity entity, View coverView) {
+        ShowDetailsActivity.navigate(getActivity(), entity, coverView);
     }
 
     @Override
